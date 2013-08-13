@@ -1,0 +1,21 @@
+body {
+  color: #444;
+  font-size: 13px;
+}
+
+#clock {
+  font-size: 60px;
+  text-align: center;
+  line-height: 1.5em;
+}
+
+.list {
+  ul {
+    margin: 1em;
+    li {
+      padding: 6px 20px;
+      background-color: #eaeaea;
+      margin: 6px 0;
+    }
+  }
+}

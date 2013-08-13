@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="span3 offset3" ng-controller="ClockCtrl">
+    <div id="clock" class="clearfix" ng-show="status == 'process'">
+      {{duration | pomotime}}
+    </div>
+    <button type="button" class="btn btn-large" ng-show="status == 'start'" ng-click="tick_start()">Start</button>
+    <form ng-submit="save_finished_task()" ng-show="status == 'end'">
+       <input type="text" value="" ng-model="finished_task" />
+    </form>
+    <div class="list finished">
+      <ul class="unstyled">
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+        <li>#learn 这是一个测试</li>
+      </ul>
+    </div>
+  </div>
+  <div class="span3">
+    <div class="new-todo">
+      <input class="span3" type="text">
+    </div>
+    <div class="list todo">
+      <ul class="unstyled">
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+        <li>
+          <div class="checkbox inline">
+            <input type="checkbox">
+            #learn 这是一个测试
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
