@@ -3,11 +3,22 @@ body {
   font-size: 13px;
 }
 
-#clock {
-  font-size: 60px;
-  text-align: center;
-  line-height: 1.5em;
+.clock-container, .new-todo {
+  height: 90px;
 }
+
+.clock-container {
+  text-align: center;
+  #clock {
+    font-size: 60px;
+    line-height: 1.5em;
+  }
+  button {
+    font-size: 40px;
+    line-height: 1.5em;
+  }
+}
+
 
 .list {
   ul {

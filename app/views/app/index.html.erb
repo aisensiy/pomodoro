@@ -1,13 +1,15 @@
 <div class="row">
   <div class="span3 offset3" ng-controller="ClockCtrl">
-    <div id="clock" class="clearfix" ng-show="status == 'process'">
-      {{duration | pomotime}}
+    <div class="clock-container">
+      <div id="clock" class="clearfix" ng-show="status == 'process'">
+        {{duration | pomotime}}
+      </div>
+      <button type="button" class="btn btn-large" ng-show="status == 'start'" ng-click="tick_start()">Start</button>
+      <form ng-submit="save_finished_task()" ng-show="status == 'end'">
+        <label>请输入番茄名称</label>
+        <input type="text" value="" ng-model="data.current_selected" required />
+      </form>
     </div>
-    <button type="button" class="btn btn-large" ng-show="status == 'start'" ng-click="tick_start()">Start</button>
-    <form ng-submit="save_finished_task()" ng-show="status == 'end'">
-      <label>请输入番茄名称</label>
-      <input type="text" value="" ng-model="data.current_selected" required />
-    </form>
     <div class="list finished" ng-controller="FinishedCtrl">
       <ul class="unstyled">
         <li ng-repeat="item in data.finished">{{item.content}} {{item.started_at | date: 'HH:mm'}} - {{item.end_at | date: 'HH:mm'}}</li>
@@ -17,18 +19,19 @@
   <div class="span3" ng-controller="TodoCtrl">
     <div class="new-todo">
       <form ng-submit="add_todo()">
+        <label for="">添加 todo</label>
         <input type="text" name="" id="" value="" ng-model="newtodocontent" />
       </form>
     </div>
     <div class="list todo">
       <ul class="unstyled">
         <li ng-repeat="item in data.todos" ng-click="set_current_selected(item)">
-          <div class="checkbox inline">
-            <form ng-submit="update_todo(item)">
-              <input type="checkbox" ng-model="item.done">
-              <input type="text" name="" id="" value="" ng-model="item.content" />
-            </form>
-          </div>
+        <div class="checkbox inline">
+          <form ng-submit="update_todo(item)">
+            <input type="checkbox" ng-model="item.done">
+            <input type="text" name="" id="" value="" ng-model="item.content" />
+          </form>
+        </div>
         </li>
       </ul>
     </div>
