@@ -14,6 +14,6 @@
 //= require angular-resource/angular-resource
 //= require app
 
-window.onbeforeunload = function() {
-  return '';
-};
+// window.onbeforeunload = function() {
+//   return '';
+// };
