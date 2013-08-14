@@ -13,7 +13,8 @@ app.factory 'Alarm', () ->
   return document.getElementById('finish_alarm')
 
 app.factory 'Todo', ($resource) ->
-  $resource('/todos/:id', {id: '@id'})
+  $resource '/todos/:id', {id: '@id'},
+    update: {method: 'PUT', params: {}}
 
 app.factory 'Finished', ($resource) ->
   $resource('/finisheds/:id', {id: '@id'})
@@ -73,6 +74,9 @@ app.controller 'TodoCtrl', ($scope, Data, Todo) ->
     newtodo.$save (data) ->
       $scope.data.todos.unshift(newtodo)
       $scope.newtodocontent = ''
+
+  $scope.update_todo = (todo) ->
+    todo.$update()
 
   $scope.set_current_selected = (item) ->
     $scope.data.current_selected = item.content
