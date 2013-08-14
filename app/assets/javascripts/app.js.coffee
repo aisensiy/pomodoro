@@ -48,7 +48,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.tick_start = () ->
     $scope.status = 'process'
     $scope.start_time = new Date()
-    $scope.data.duration = 5
+    $scope.data.duration = 25 * 60
     (tick = () ->
       if $scope.data.duration <= 0
         $timeout.cancel(prom)
