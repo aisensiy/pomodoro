@@ -15,7 +15,8 @@ app.factory 'Data', () ->
   return {
     finished: finished,
     todos: todos,
-    current_selected: ''
+    current_selected: '',
+    duration: ''
   }
 
 app.factory 'Alarm', () ->
@@ -35,24 +36,27 @@ app.filter 'pomotime', () ->
 
     "#{min}:#{sec}"
 
+app.controller 'TopCtrl', ($scope, Data) ->
+  $scope.data = Data
+
 app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.data = Data
   prom = null
   $scope.status = 'start'
-  $scope.duration = 0
+  $scope.data.duration = 0
 
   $scope.tick_start = () ->
     $scope.status = 'process'
     $scope.start_time = new Date()
-    $scope.duration = 5
+    $scope.data.duration = 5
     (tick = () ->
-      if $scope.duration <= 0
+      if $scope.data.duration <= 0
         $timeout.cancel(prom)
         $scope.tick_end()
         return
 
       console.log 'tick'
-      $scope.duration -= 1
+      $scope.data.duration -= 1
       prom = $timeout(tick, 1000)
     )()
 

@@ -2,7 +2,7 @@
   <div class="span3 offset3" ng-controller="ClockCtrl">
     <div class="clock-container">
       <div id="clock" class="clearfix" ng-show="status == 'process'">
-        {{duration | pomotime}}
+        {{data.duration | pomotime}}
       </div>
       <button type="button" class="btn btn-large" ng-show="status == 'start'" ng-click="tick_start()">Start</button>
       <form ng-submit="save_finished_task()" ng-show="status == 'end'">
