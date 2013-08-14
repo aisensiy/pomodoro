@@ -3,6 +3,16 @@ body {
   font-size: 13px;
 }
 
+.col {
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+  background-color: #fafafa;
+}
+
+.col-wrap {
+  overflow: hidden;
+}
+
 .clock-container, .new-todo {
   height: 90px;
 }
@@ -16,13 +26,21 @@ body {
   button {
     font-size: 40px;
     line-height: 1.5em;
+    margin-top: 10px;
+  }
+}
+
+.new-todo {
+  form {
+    margin: 0;
+    padding: 28px 20px 0 20px;
   }
 }
 
 
 .list {
   ul {
-    margin: 1em;
+    margin: 1em 0 1em 0;
     li {
       padding: 6px 20px;
       background-color: #eaeaea;
