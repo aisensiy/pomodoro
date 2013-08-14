@@ -1,4 +1,7 @@
 Pomodoro::Application.routes.draw do
+  resources :todos
+
+
   get "app/index"
 
   # The priority is based upon order of creation:
