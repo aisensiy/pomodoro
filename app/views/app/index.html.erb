@@ -5,90 +5,31 @@
     </div>
     <button type="button" class="btn btn-large" ng-show="status == 'start'" ng-click="tick_start()">Start</button>
     <form ng-submit="save_finished_task()" ng-show="status == 'end'">
-       <input type="text" value="" ng-model="finished_task" />
+      <label>请输入番茄名称</label>
+      <input type="text" value="" ng-model="data.current_selected" required />
     </form>
-    <div class="list finished">
+    <div class="list finished" ng-controller="FinishedCtrl">
       <ul class="unstyled">
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
-        <li>#learn 这是一个测试</li>
+        <li ng-repeat="item in data.finished">{{item}}</li>
       </ul>
     </div>
   </div>
-  <div class="span3">
+  <div class="span3" ng-controller="TodoCtrl">
     <div class="new-todo">
-      <input class="span3" type="text">
+      <form ng-submit="add_todo()">
+        <input type="text" name="" id="" value="" ng-model="newtodocontent" />
+      </form>
     </div>
     <div class="list todo">
       <ul class="unstyled">
-        <li>
+        <li ng-repeat="item in data.todos" ng-click="set_current_selected(item)">
           <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
-          </div>
-        </li>
-        <li>
-          <div class="checkbox inline">
-            <input type="checkbox">
-            #learn 这是一个测试
+            <input type="checkbox" ng-model="item.done">
+            <input type="text" name="" id="" value="" ng-model="item.content" />
           </div>
         </li>
       </ul>
     </div>
   </div>
 </div>
+<audio id="finish_alarm" src="/三全音.mp3"></audio>
