@@ -1,4 +1,7 @@
 Pomodoro::Application.routes.draw do
+  resources :finisheds
+
+
   resources :todos
 
 
