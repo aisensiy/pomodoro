@@ -1,4 +1,4 @@
-app = angular.module('app', [])
+app = angular.module('app', ['ngResource'])
 
 app.factory 'Data', () ->
   finished = ['finished one', 'finished two']
@@ -12,6 +12,12 @@ app.factory 'Data', () ->
 app.factory 'Alarm', () ->
   return document.getElementById('finish_alarm')
 
+app.factory 'Todo', ($resource) ->
+  $resource('/todos/:id', {id: '@id'})
+
+app.factory 'Finished', ($resource) ->
+  $resource('/finisheds/:id', {id: '@id'})
+
 app.filter 'pomotime', () ->
   (text) ->
     sec = (100 + text % 60).toString().substr(1)
@@ -19,7 +25,7 @@ app.filter 'pomotime', () ->
 
     "#{min}:#{sec}"
 
-app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm) ->
+app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.data = Data
   prom = null
   $scope.status = 'start'
@@ -45,18 +51,28 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm) ->
     Alarm.play()
 
   $scope.save_finished_task = () ->
-    $scope.data.finished.unshift $scope.data.current_selected
-    $scope.data.current_selected = ''
-    $scope.status = 'start'
+    finished = new Finished
+      content: $scope.data.current_selected
+      started_at: $scope.start_time / 1000
+      end_at: new Date / 1000
 
-app.controller 'FinishedCtrl', ($scope, Data) ->
-  $scope.data = Data
+    finished.$save (data) ->
+      $scope.data.finished.unshift finished
+      $scope.data.current_selected = ''
+      $scope.status = 'start'
 
-app.controller 'TodoCtrl', ($scope, Data) ->
+app.controller 'FinishedCtrl', ($scope, Data, Finished) ->
   $scope.data = Data
+  $scope.data.finished = Finished.query()
+
+app.controller 'TodoCtrl', ($scope, Data, Todo) ->
+  $scope.data = Data
+  $scope.data.todos = Todo.query()
   $scope.add_todo = () ->
-    $scope.data.todos.unshift({content: $scope.newtodocontent, done: false})
-    $scope.newtodocontent = ''
+    newtodo = new Todo({content: $scope.newtodocontent, done: false})
+    newtodo.$save (data) ->
+      $scope.data.todos.unshift(newtodo)
+      $scope.newtodocontent = ''
 
   $scope.set_current_selected = (item) ->
     $scope.data.current_selected = item.content

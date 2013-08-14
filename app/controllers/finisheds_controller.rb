@@ -2,7 +2,7 @@ class FinishedsController < ApplicationController
   respond_to :json
 
   def index
-    @finisheds = Finished.all
+    @finisheds = Finished.order('updated_at desc')
     respond_with @finisheds
   end
 

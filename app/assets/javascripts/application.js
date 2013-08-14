@@ -11,4 +11,5 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require angular/angular
+//= require angular-resource/angular-resource
 //= require app

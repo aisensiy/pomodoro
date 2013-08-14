@@ -2,7 +2,7 @@ class TodosController < ApplicationController
   respond_to :json
 
   def index
-    @todos = Todo.all
+    @todos = Todo.order('updated_at desc')
     respond_with @todos
   end
 

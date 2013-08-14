@@ -21,7 +21,9 @@ body {
 }
 
 .todo {
-  li {
+  ul li {
+    padding-top: 4px;
+    padding-bottom: 4px;
     div.checkbox {
       line-height: 1.5em;
       padding-top: 0;
@@ -34,6 +36,10 @@ body {
       margin-top: -2px;
       padding: 0;
       box-shadow: none;
+    }
+    form {
+      margin: 0;
+      padding: 0;
     }
   }
 }
