@@ -1,10 +1,3 @@
-GIT
-  remote: git@github.com:42dev/bower-rails.git
-  revision: 92737a806f78762bfdf6f2f216bb29ad16eaa960
-  branch: master
-  specs:
-    bower-rails (0.4.0)
-
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -37,6 +30,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     backports (3.3.3)
+    bower-rails (0.4.0)
     builder (3.0.4)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -154,7 +148,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bower-rails!
+  bower-rails
   coffee-rails (~> 3.2.1)
   grape
   jquery-rails

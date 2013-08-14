@@ -23,7 +23,7 @@ end
 
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
-gem 'bower-rails', git: 'git@github.com:42dev/bower-rails.git', branch: 'master'
+gem 'bower-rails'
 
 gem 'thin'
 gem 'grape'
