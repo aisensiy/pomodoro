@@ -13,3 +13,7 @@
 //= require angular/angular
 //= require angular-resource/angular-resource
 //= require app
+
+window.onbeforeunload = function() {
+  return '';
+};
