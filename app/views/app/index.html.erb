@@ -27,9 +27,9 @@
       <ul class="unstyled">
         <li ng-repeat="item in data.todos" ng-click="set_current_selected(item)">
         <div class="checkbox inline">
-          <form ng-submit="update_todo(item)">
-            <input type="checkbox" ng-model="item.done" ng-click="update_todo(item)">
-            <input type="text" name="" id="" value="" ng-model="item.content" />
+          <form ng-submit="update_todo(item, $index)">
+            <input type="checkbox" ng-model="item.done" ng-click="update_todo(item, $index)">
+            <input type="text" name="" id="" value="" ng-model="item.content" empty="update_todo(item, $index)" />
           </form>
         </div>
         </li>

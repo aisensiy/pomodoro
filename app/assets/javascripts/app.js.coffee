@@ -1,5 +1,14 @@
 app = angular.module('app', ['ngResource'])
 
+app.directive 'empty', () ->
+  (scope, element, attrs) ->
+    element.bind('empty', () ->
+      scope.$apply(attrs['empty'])
+    )
+    element.bind('keyup', () ->
+      scope.$apply(attrs['empty'])
+    )
+
 app.factory 'Data', () ->
   finished = ['finished one', 'finished two']
   todos = [{content: '#todo task', done: true}]
@@ -75,8 +84,12 @@ app.controller 'TodoCtrl', ($scope, Data, Todo) ->
       $scope.data.todos.unshift(newtodo)
       $scope.newtodocontent = ''
 
-  $scope.update_todo = (todo) ->
-    todo.$update()
+  $scope.update_todo = (todo, index) ->
+    if todo.content
+      todo.$update()
+    else
+      todo.$remove () ->
+        $scope.data.todos.splice(index, 1)
 
   $scope.set_current_selected = (item) ->
     $scope.data.current_selected = item.content
