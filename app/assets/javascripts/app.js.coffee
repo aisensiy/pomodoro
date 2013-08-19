@@ -47,16 +47,19 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
 
   $scope.tick_start = () ->
     $scope.status = 'process'
-    $scope.start_time = new Date()
-    $scope.data.duration = 25 * 60
+    start_time = new Date()
+    duration = 25 * 60000
+    $scope.start_time = start_time
+    $scope.expected_end_time = start_time + duration
     (tick = () ->
-      if $scope.data.duration <= 0
+      passed = new Date - $scope.start_time
+      if passed > duration
         $timeout.cancel(prom)
+        $scope.data.duration = 0
         $scope.tick_end()
         return
 
-      console.log 'tick'
-      $scope.data.duration -= 1
+      $scope.data.duration = ~~((duration - passed) / 1000)
       prom = $timeout(tick, 1000)
     )()
 
