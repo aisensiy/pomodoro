@@ -12,7 +12,7 @@
     </div>
     <div class="list finished" ng-controller="FinishedCtrl">
       <div ng-repeat="item in data.finished.results">
-        <span>{{item[0]}}</span>
+        <span>{{item[0]}} &times; {{item[1].length}}</span>
         <ul class="unstyled">
           <li ng-repeat="task in item[1]">{{task.content}} {{task.started_at | date: 'HH:mm'}} - {{task.end_at | date: 'HH:mm'}}</li>
         </ul>
