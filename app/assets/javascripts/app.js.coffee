@@ -9,9 +9,19 @@ app.directive 'empty', () ->
       scope.$apply(attrs['empty'])
     )
 
+unshift_new_task = (results, item) ->
+  date = new Date item.updated_at
+  date_s = date.format("%Y-%m-%d")
+  finished = false
+  for i, d of results
+    if d[0] == date_s
+      d[1].unshift item
+      finished = true
+
 app.factory 'Data', () ->
   finished = ['finished one', 'finished two']
   todos = [{content: '#todo task', done: true}]
+
   return {
     finished: finished,
     todos: todos,
@@ -27,7 +37,7 @@ app.factory 'Todo', ($resource) ->
     update: {method: 'PUT', params: {}}
 
 app.factory 'Finished', ($resource) ->
-  $resource('/finisheds/:id', {id: '@id'})
+  $resource '/finisheds/:id', {id: '@id'}, { query: { method: 'GET', params: {}, isArray: false } }
 
 app.filter 'pomotime', () ->
   (text) ->
@@ -48,7 +58,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.tick_start = () ->
     $scope.status = 'process'
     start_time = new Date()
-    duration = 25 * 60000
+    duration = 1 * 600
     $scope.start_time = start_time
     $scope.expected_end_time = start_time + duration
     (tick = () ->
@@ -74,7 +84,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
       end_at: new Date / 1000
 
     finished.$save (data) ->
-      $scope.data.finished.unshift finished
+      unshift_new_task $scope.data.finished.results, finished
       $scope.data.current_selected = ''
       $scope.status = 'start'
 

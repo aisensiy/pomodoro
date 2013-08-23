@@ -3,7 +3,8 @@ class FinishedsController < ApplicationController
 
   def index
     @finisheds = Finished.order('updated_at desc')
-    respond_with @finisheds
+    @finisheds = @finisheds.group_by { |task| task.updated_at.beginning_of_day.to_date.to_s }.sort.reverse
+    respond_with({ results: @finisheds })
   end
 
   def create

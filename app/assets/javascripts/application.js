@@ -12,6 +12,7 @@
 //
 //= require angular/angular
 //= require angular-resource/angular-resource
+//= require date
 //= require app
 
 // window.onbeforeunload = function() {

@@ -11,9 +11,12 @@
       </form>
     </div>
     <div class="list finished" ng-controller="FinishedCtrl">
-      <ul class="unstyled">
-        <li ng-repeat="item in data.finished">{{item.content}} {{item.started_at | date: 'HH:mm'}} - {{item.end_at | date: 'HH:mm'}}</li>
-      </ul>
+      <div ng-repeat="item in data.finished.results">
+        <span>{{item[0]}}</span>
+        <ul class="unstyled">
+          <li ng-repeat="task in item[1]">{{task.content}} {{task.started_at | date: 'HH:mm'}} - {{task.end_at | date: 'HH:mm'}}</li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="span4 col" ng-controller="TodoCtrl">
