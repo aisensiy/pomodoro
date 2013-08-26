@@ -31,12 +31,14 @@ app.factory 'Data', () ->
     else
       @current_selected = [item.content]
 
+    console.log @current_selected
+
 
 
   return {
     finished: finished,
     todos: todos,
-    current_selected: null,
+    current_selected: [],
     duration: '',
     set_current_selected: set_current_selected
   }
@@ -70,7 +72,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.tick_start = () ->
     $scope.status = 'process'
     start_time = new Date()
-    duration = 25 * 60000
+    duration = 5
     $scope.start_time = start_time
     $scope.expected_end_time = start_time + duration
     (tick = () ->
@@ -92,7 +94,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.save_finished_task = () ->
 
     finished = new Finished
-      content: $scope.data.current_selected.join " + "
+      content: document.getElementById('tasks').value
       started_at: $scope.start_time / 1000
       end_at: new Date / 1000
 
@@ -100,7 +102,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
 
     finished.$save (data) ->
       unshift_new_task $scope.data.finished.results, finished
-      $scope.data.current_selected = ''
+      $scope.data.current_selected = []
       $scope.status = 'start'
 
 app.controller 'FinishedCtrl', ($scope, Data, Finished) ->
