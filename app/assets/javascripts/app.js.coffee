@@ -24,12 +24,21 @@ unshift_new_task = (results, item) ->
 app.factory 'Data', () ->
   finished = ['finished one', 'finished two']
   todos = [{content: '#todo task', done: true}]
+  set_current_selected = (item) ->
+    if @current_selected
+      if item not in @current_selected
+        @current_selected.push(item.content)
+    else
+      @current_selected = [item.content]
+
+
 
   return {
     finished: finished,
     todos: todos,
-    current_selected: '',
-    duration: ''
+    current_selected: null,
+    duration: '',
+    set_current_selected: set_current_selected
   }
 
 app.factory 'Alarm', () ->
@@ -81,10 +90,13 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
     Alarm.play()
 
   $scope.save_finished_task = () ->
+
     finished = new Finished
-      content: $scope.data.current_selected
+      content: $scope.data.current_selected.join " + "
       started_at: $scope.start_time / 1000
       end_at: new Date / 1000
+
+    console.log $scope.data.current_selected
 
     finished.$save (data) ->
       unshift_new_task $scope.data.finished.results, finished
@@ -110,6 +122,3 @@ app.controller 'TodoCtrl', ($scope, Data, Todo) ->
     else
       todo.$remove () ->
         $scope.data.todos.splice(index, 1)
-
-  $scope.set_current_selected = (item) ->
-    $scope.data.current_selected = item.content

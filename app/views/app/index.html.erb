@@ -7,14 +7,14 @@
       <button type="button" class="btn btn-large" ng-show="status == 'start'" ng-click="tick_start()">Start</button>
       <form ng-submit="save_finished_task()" ng-show="status == 'end'">
         <label>请输入番茄名称</label>
-        <input type="text" value="" ng-model="data.current_selected" required />
+        <input type="text" value="{{data.current_selected.join(' + ')}}" required />
       </form>
     </div>
     <div class="list finished" ng-controller="FinishedCtrl">
       <div ng-repeat="item in data.finished.results">
         <span>{{item[0]}} &times; {{item[1].length}}</span>
         <ul class="unstyled">
-          <li ng-repeat="task in item[1]">{{task.content}} {{task.started_at | date: 'HH:mm'}} - {{task.end_at | date: 'HH:mm'}}</li>
+          <li ng-repeat="task in item[1]"><span ng-click="data.set_current_selected(task)">{{task.content}} {{task.started_at | date: 'HH:mm'}} - {{task.end_at | date: 'HH:mm'}}</span></li>
         </ul>
       </div>
     </div>
@@ -28,7 +28,7 @@
     </div>
     <div class="list todo">
       <ul class="unstyled">
-        <li ng-repeat="item in data.todos" ng-click="set_current_selected(item)">
+        <li ng-repeat="item in data.todos" ng-click="data.set_current_selected(item)">
         <div class="checkbox inline">
           <form ng-submit="update_todo(item, $index)" class="">
             <input type="checkbox" ng-model="item.done" ng-click="update_todo(item, $index)">
