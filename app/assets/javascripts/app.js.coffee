@@ -18,6 +18,9 @@ unshift_new_task = (results, item) ->
       d[1].unshift item
       finished = true
 
+  if not finished
+    results.unshift [date_s, [item]]
+
 app.factory 'Data', () ->
   finished = ['finished one', 'finished two']
   todos = [{content: '#todo task', done: true}]
