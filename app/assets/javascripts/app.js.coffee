@@ -25,20 +25,22 @@ app.factory 'Data', () ->
   finished = ['finished one', 'finished two']
   todos = [{content: '#todo task', done: true}]
   set_current_selected = (item) ->
-    if @current_selected
-      if item not in @current_selected
-        @current_selected.push(item.content)
-    else
-      @current_selected = [item.content]
-
     console.log @current_selected
+    _selected = @current_selected && @current_selected.split(' + ') || null
+    console.log _selected
+    if _selected
+      if item.content not in _selected
+        _selected.push(item.content)
+    else
+      _selected = [item.content]
 
+    @current_selected =  _selected.join ' + '
 
 
   return {
     finished: finished,
     todos: todos,
-    current_selected: [],
+    current_selected: '',
     duration: '',
     set_current_selected: set_current_selected
   }
@@ -72,7 +74,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.tick_start = () ->
     $scope.status = 'process'
     start_time = new Date()
-    duration = 25 * 60000
+    duration = 5
     $scope.start_time = start_time
     $scope.expected_end_time = start_time + duration
     (tick = () ->
@@ -94,7 +96,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.save_finished_task = () ->
 
     finished = new Finished
-      content: document.getElementById('tasks').value
+      content: $scope.data.current_selected
       started_at: $scope.start_time / 1000
       end_at: new Date / 1000
 
@@ -102,7 +104,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
 
     finished.$save (data) ->
       unshift_new_task $scope.data.finished.results, finished
-      $scope.data.current_selected = []
+      $scope.data.current_selected = ''
       $scope.status = 'start'
 
 app.controller 'FinishedCtrl', ($scope, Data, Finished) ->
