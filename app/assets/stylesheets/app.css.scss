@@ -30,15 +30,21 @@ body {
   }
 }
 
-.new-todo {
-  form {
-    margin: 0;
-    padding: 28px 20px 0 20px;
-    input[type=text] {
-      width: 312px;
-    }
+@mixin form_style() {
+  margin: 0;
+  padding: 28px 20px 0 20px;
+  input[type=text] {
+    width: 312px;
+  }
+  label {
+    text-align: left;
   }
 }
+
+.new-todo form, form.new-finish {
+  @include form_style();
+}
+
 
 
 .list {

@@ -5,7 +5,7 @@
         {{data.duration | pomotime}}
       </div>
       <button type="button" class="btn btn-large" ng-show="status == 'start'" ng-click="tick_start()">Start</button>
-      <form ng-submit="save_finished_task()" ng-show="status == 'end'">
+      <form ng-submit="save_finished_task()" ng-show="status == 'end'" class="new-finish">
         <label>请输入番茄名称</label>
         <input id="tasks" name="tasks" type="text" value="{{ data.current_selected.join(' + ') }}" required />
       </form>
