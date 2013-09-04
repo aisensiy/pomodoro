@@ -72,7 +72,7 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
   $scope.tick_start = () ->
     $scope.status = 'process'
     start_time = new Date()
-    duration = 25 * 60000
+    duration = 5
     $scope.start_time = start_time
     $scope.expected_end_time = start_time + duration
     (tick = () ->

@@ -12,7 +12,7 @@ Date.formats =
   "b": -> Date.months[@getMonth()].substring(0, 3)
   "B": -> Date.months[@getMonth()]
   "c": -> @toLocaleString()
-  "d": -> @getDate().toString()
+  "d": -> @getDate().pad(2)
   "F": -> "#{@getFullYear()}-#{@getMonth() + 1}-#{@getDate()}"
   "H": -> @getHours().pad(2)
   "I": -> "#{(@getHours() % 12) || 12}"
