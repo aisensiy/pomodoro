@@ -14,7 +14,7 @@
       <div ng-repeat="item in data.finished.results">
         <span>{{item[0]}} &times; {{item[1].length}}</span>
         <ul class="unstyled">
-          <li ng-repeat="task in item[1]"><span ng-click="data.set_current_selected(task)">{{task.content}} {{task.started_at | date: 'HH:mm'}} - {{task.end_at | date: 'HH:mm'}}</span></li>
+          <li ng-repeat="task in item[1]" ng-class="{done: isdone(task)}" ><span ng-click="data.set_current_selected(task)">{{task.content}} {{task.started_at | date: 'HH:mm'}} - {{task.end_at | date: 'HH:mm'}}</span></li>
         </ul>
       </div>
     </div>

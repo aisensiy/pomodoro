@@ -103,6 +103,9 @@ app.controller 'ClockCtrl', ($scope, $timeout, Data, Alarm, Finished) ->
     $scope.status = 'end'
     Alarm.play()
 
+  $scope.isdone = (item) ->
+    /#done /.test(item.content)
+
   $scope.save_finished_task = () ->
 
     finished = new Finished
