@@ -21,6 +21,16 @@ unshift_new_task = (results, item) ->
   if not finished
     results.unshift [date_s, [item]]
 
+remove_finished = (results, item) ->
+  date = new Date item.updated_at
+  date_s = date.format("%Y-%m-%d")
+  for i, d of results
+    if d[0] == date_s
+      for j, obj of d[1]
+        if obj.content == item.content
+          d[1].splice(j, 1)
+
+
 app.factory 'Data', () ->
   finished = ['finished one', 'finished two']
   todos = [{content: '#todo task', done: true}]
@@ -122,7 +132,11 @@ app.controller 'TodoCtrl', ($scope, Data, Todo) ->
 
   $scope.update_todo = (todo, index) ->
     if todo.content
-      todo.$update()
+      todo.$update (data) ->
+        if todo.done
+          unshift_new_task $scope.data.finished.results, data.related_finished
+        else
+          remove_finished $scope.data.finished.results, data.related_finished
     else
       todo.$remove () ->
         $scope.data.todos.splice(index, 1)
